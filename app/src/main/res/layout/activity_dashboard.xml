@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:text="Welcome"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Location"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/getloc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get loaction"
+        android:layout_alignParentBottom="true"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:textColor="#999"
+            android:text="University"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:textColor="#999"
+            android:text="Mall"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:textColor="#999"
+            android:text="Society"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+<Button
+    android:id="@+id/out"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Log out"
+    android:layout_alignParentBottom="true"
+    android:textColor="#fff"
+    android:background="#f44336"
+   />
+   
+</RelativeLayout>
