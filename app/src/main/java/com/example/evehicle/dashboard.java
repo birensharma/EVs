@@ -2,6 +2,7 @@ package com.example.evehicle;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,7 +22,7 @@ public class dashboard extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 123;
     private FirebaseAuth auth;
-    private Button logout,getLoc;
+    private Button logout,getLoc,university;
     private TextView txt, loc;
     private double latitude = 0.0, longitude = 0.0;
 
@@ -34,7 +35,14 @@ public class dashboard extends AppCompatActivity {
         txt=findViewById(R.id.text);
         loc=findViewById(R.id.loc);
         getLoc=findViewById(R.id.getloc);
+        university=findViewById(R.id.uni);
 
+        university.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+           startActivity(new Intent(dashboard.this,university.class));
+            }
+        });
         String locationDetail="Latitide:"+latitude+"\nLongitude:"+longitude;
 
         loc.setText(locationDetail);
