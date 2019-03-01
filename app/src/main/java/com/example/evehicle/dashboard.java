@@ -40,7 +40,7 @@ public class dashboard extends AppCompatActivity {
         university.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           startActivity(new Intent(dashboard.this,university.class));
+           startActivity(new Intent(dashboard.this,choice.class));
             }
         });
         String locationDetail="Latitide:"+latitude+"\nLongitude:"+longitude;

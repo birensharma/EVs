@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".university">
+    tools:context=".choice">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter required amount of power"/>
-        <EditText
-            android:id="@+id/input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"/>
+
         <Button
-            android:id="@+id/send"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:id="@+id/custom"
+            android:text="Custom"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btnback"
-            android:textColor="#fff"
-            android:layout_marginTop="10dp"
+            android:textColor="#fff"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/standard"
+            android:text="Standard"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btnback"
+            android:textColor="#fff"/>
 
-            />
+
+
 
     </LinearLayout>
-
 
 </RelativeLayout>

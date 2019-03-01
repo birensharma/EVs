@@ -12,12 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".choice"></activity>
+
         <service android:name=".MyFirebaseMessaging">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <activity android:name=".society"></activity>
+
+        <activity android:name=".society" />
         <activity android:name=".mall" />
         <activity android:name=".university" />
         <activity android:name=".dashboard" />
