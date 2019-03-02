@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="log in"
             android:textColor="#fff"
-            android:background="#2196f3"/>
+            android:background="@drawable/btnback"/>
     </LinearLayout>
 
 

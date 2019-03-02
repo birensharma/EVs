@@ -15,30 +15,78 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email,password;
     private Button log;
+    private DatabaseReference db,f;
+    private ValueEventListener valueEventListener;
     @Override
     protected void onStart() {
         super.onStart();
+        init();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null)
             navigate();
-        else
-            Toast.makeText(this, "Please login to continue", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db= FirebaseDatabase.getInstance().getReference();
+        f= FirebaseDatabase.getInstance().getReference();
         email=findViewById(R.id.email);
         password=findViewById(R.id.pass);
         log=findViewById(R.id.log);
-        mAuth = FirebaseAuth.getInstance();
+        valueEventListener=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean isPresent=true;
+                if(dataSnapshot.hasChildren()){
+                    for(DataSnapshot dd: dataSnapshot.getChildren())
+                    {
+                        if(dd.child("email").getValue(String.class).equals(email.getText().toString()) )
+                        {
+                            isPresent=true;
+                            break;
+                        }
+                        else isPresent=false;
 
+                    }
+                    if(!isPresent)
+                    {
+                        db.removeEventListener(valueEventListener);
+                        DatabaseReference d=f.push();
+                        d.child("email").setValue(email.getText().toString());
+                        d.child("notification").child("text").setValue("Hello");
+                    }
+                    else
+                        db.removeEventListener(valueEventListener);
+                }
+                else
+                {
+                    db.removeEventListener(valueEventListener);
+                    DatabaseReference d=f.push();
+                    d.child("email").setValue(email.getText().toString());
+                    d.child("notification").child("text").setValue("Hello");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        mAuth = FirebaseAuth.getInstance();
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,15 +101,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void login(String email,String pass){
+    private void login(final String email,String pass){
         mAuth.signInWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(MainActivity.this, ""+user.getEmail()
-                                    , Toast.LENGTH_SHORT).show();
+                            db.addValueEventListener(valueEventListener);
                             navigate();
                         } else {
                             Toast.makeText(getBaseContext(), "Authentication failed.",
@@ -72,5 +118,17 @@ public class MainActivity extends AppCompatActivity {
     }
     private void navigate(){
         startActivity(new Intent(this,dashboard.class));
+    }
+    private void init(){
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Message")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful())
+                            Toast.makeText(MainActivity.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

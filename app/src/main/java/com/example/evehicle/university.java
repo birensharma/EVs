@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,29 +26,52 @@ public class university extends AppCompatActivity {
     private Button send;
     private EditText input;
     private DatabaseReference db;
-
+    private ValueEventListener valueEventListener;
+    private String umail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university);
-
         init();
-        db=FirebaseDatabase.getInstance().getReference("/notification/1/");
+        db=FirebaseDatabase.getInstance().getReference();
         send = findViewById(R.id.send);
         input =findViewById(R.id.input);
+        umail= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        valueEventListener=new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                db.removeEventListener(valueEventListener);
+                for(DataSnapshot dd:dataSnapshot.getChildren()){
+                    if(dd.child("email").getValue(String.class).equals(umail)){
+                        db.child(dd.getKey()+"/notification/text").setValue(input.getText().toString())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(university.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(university.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(input.getText().toString().equals(""))
                     Toast.makeText(university.this, "Input is empty", Toast.LENGTH_SHORT).show();
                 else
-                    db.child("text").setValue(input.getText().toString())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(university.this, "Success", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    db.addValueEventListener(valueEventListener);
             }
         });
 
@@ -59,12 +83,8 @@ public class university extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(university.this, "Subscribed to topic successful", Toast.LENGTH_SHORT).show();
-                        } else {
+                        if (!task.isSuccessful())
                             Toast.makeText(university.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
-                        }
-
                     }
                 });
 
