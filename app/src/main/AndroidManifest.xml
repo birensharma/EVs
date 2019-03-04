@@ -7,12 +7,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/electriccar"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/electriccar"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".choice"></activity>
+        <activity android:name=".Custom"
+            android:label="Appliances">
+        </activity>
+        <activity
+            android:name=".choice"
+            android:label="Choice">
+        </activity>
 
         <service android:name=".MyFirebaseMessaging">
             <intent-filter>
@@ -20,11 +26,22 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".society" />
-        <activity android:name=".mall" />
-        <activity android:name=".university" />
-        <activity android:name=".dashboard" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".society"
+            android:label="Society" />
+        <activity
+            android:name=".mall"
+            android:label="Mall" />
+        <activity
+            android:name=".university"
+            android:label="University" />
+        <activity
+            android:name=".dashboard"
+            android:label="Dashboard" />
+        <activity android:name=".Response" />
+        <activity
+            android:name=".MainActivity"
+            android:label="V2G">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

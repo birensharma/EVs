@@ -28,6 +28,8 @@ public class university extends AppCompatActivity {
     private DatabaseReference db;
     private ValueEventListener valueEventListener;
     private String umail;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

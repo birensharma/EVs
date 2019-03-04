@@ -25,5 +25,11 @@ public class choice extends AppCompatActivity {
                 startActivity(new Intent(choice.this,university.class));
             }
         });
+        custom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(choice.this,Custom.class));
+            }
+        });
     }
 }
