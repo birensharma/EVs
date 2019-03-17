@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹"
+        android:textSize="20dp"
+        android:layout_toLeftOf="@id/money"
+        android:layout_above="@id/paynow"
+        android:layout_marginBottom="30dp" />
+    <EditText
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Amount"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:id="@+id/paynow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnback"
+        android:text="Pay Now"
+        android:textColor="#fff"
+        android:layout_below="@id/money"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

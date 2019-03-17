@@ -6,14 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".Response"
     android:padding="20dp">
+    <TextView
+        android:id="@+id/req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No request"
+        android:textSize="40dp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
 <Button
     android:id="@+id/accept"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Accept"
+    android:textColor="#fff"
     android:padding="30dp"
     android:background="@drawable/btnaccept"
-    android:layout_centerVertical="true"/>
+
+    android:layout_marginTop="300dp"
+   />
     <Button
         android:id="@+id/reject"
         android:layout_width="wrap_content"
@@ -22,6 +34,8 @@
         android:padding="30dp"
         android:textColor="#fff"
         android:background="@drawable/btnreject"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+
+        android:layout_marginTop="300dp"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>

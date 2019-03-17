@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-public class MainActivity extends AppCompatActivity {
+public class CarLogin extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email,password;
     private Button log,signup;
@@ -96,18 +96,18 @@ public class MainActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(mail)&&!TextUtils.isEmpty(pass))
                     login(mail,pass);
                 else
-                    Toast.makeText(MainActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
-            }
-        });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,SignUp.class);
-                i.putExtra("type","user");
-                startActivity(i);
+                    Toast.makeText(CarLogin.this, "Fields are empty", Toast.LENGTH_SHORT).show();
             }
         });
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(CarLogin.this,SignUp.class);
+                i.putExtra("type","car");
+                startActivity(i);
+            }
+        });
     }
     private void login(final String email,String pass){
         mAuth.signInWithEmailAndPassword(email,pass)
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void navigate(){
-        startActivity(new Intent(this,dashboard.class));
+        startActivity(new Intent(this,CarDashboard.class));
     }
     private void init(){
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (!task.isSuccessful())
-                            Toast.makeText(MainActivity.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CarLogin.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
                     }
                 });
 

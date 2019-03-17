@@ -35,50 +35,23 @@
         android:layout_centerInParent="true"
         >
         <Button
-            android:id="@+id/uni"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btnback"
-            android:textColor="#fff"
-            android:text="University"
-            android:layout_marginBottom="10dp"/>
-        <Button
-            android:id="@+id/mall"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btnback"
-            android:textColor="#fff"
-            android:text="Mall"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            />
-        <Button
-            android:id="@+id/soc"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btnback"
-            android:textColor="#fff"
-            android:text="Society"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
-        <Button
-            android:id="@+id/track"
-            android:layout_width="100dp"
+            android:id="@+id/resp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/transbtn"
-            android:textColor="#000"
-            android:text="Location"
+            android:textColor="#2196f3"
+            android:text="Check requests"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
-<Button
-    android:id="@+id/out"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Log out"
-    android:layout_alignParentBottom="true"
-    android:textColor="#fff"
-    android:background="#f44336"
-   />
-   
+    <Button
+        android:id="@+id/out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:background="#f44336"
+        />
+
 </RelativeLayout>

@@ -22,7 +22,7 @@ public class dashboard extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 123;
     private FirebaseAuth auth;
-    private Button logout,getLoc,university;
+    private Button logout,getLoc,university,locBtn;
     private TextView txt, loc;
     private double latitude = 0.0, longitude = 0.0;
 
@@ -36,6 +36,7 @@ public class dashboard extends AppCompatActivity {
         loc=findViewById(R.id.loc);
         getLoc=findViewById(R.id.getloc);
         university=findViewById(R.id.uni);
+        locBtn=findViewById(R.id.track);
 
         university.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,12 @@ public class dashboard extends AppCompatActivity {
         });
         String locationDetail="Latitide:"+latitude+"\nLongitude:"+longitude;
 
+        locBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this,LocationMap.class));
+            }
+        });
         loc.setText(locationDetail);
 
         auth=FirebaseAuth.getInstance();

@@ -4,8 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,20 +24,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class university extends AppCompatActivity {
+public class university extends AppCompatActivity{
 
     private Button send;
     private EditText input;
     private DatabaseReference db;
     private ValueEventListener valueEventListener;
     private String umail;
-
+    private Spinner from,to;
+    private  ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university);
         init();
+        from=findViewById(R.id.from);
+        to=findViewById(R.id.to);
         db=FirebaseDatabase.getInstance().getReference();
         send = findViewById(R.id.send);
         input =findViewById(R.id.input);
@@ -45,7 +51,9 @@ public class university extends AppCompatActivity {
                 db.removeEventListener(valueEventListener);
                 for(DataSnapshot dd:dataSnapshot.getChildren()){
                     if(dd.child("email").getValue(String.class).equals(umail)){
-                        db.child(dd.getKey()+"/notification/text").setValue(input.getText().toString())
+                        db.child(dd.getKey()+"/notification/text").setValue(from.getSelectedItem().toString()+
+                                " - "+to.getSelectedItem().toString()+
+                                " | "+input.getText().toString())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -77,6 +85,11 @@ public class university extends AppCompatActivity {
             }
         });
 
+       adapter= ArrayAdapter.createFromResource(this,
+                R.array.time_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        from.setAdapter(adapter);
+        to.setAdapter(adapter);
 
 
     }
@@ -91,4 +104,5 @@ public class university extends AppCompatActivity {
                 });
 
     }
+
 }

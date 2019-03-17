@@ -15,22 +15,43 @@
             android:layout_height="match_parent"
             android:padding="20dp">
             <Button
+                android:layout_below="@id/spin"
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/btnback"
                 android:textColor="#fff" />
-            <TextView
-                android:id="@+id/info"
+            <LinearLayout
+                android:id="@+id/spin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total power Required:"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="30dp"/>
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="to"
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
         </RelativeLayout>
 
 

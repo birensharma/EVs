@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectLogin">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Login"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:layout_above="@id/carlogin"
+        android:layout_marginBottom="40dp"/>
+    <Button
+        android:id="@+id/carlogin"
+        android:background="@drawable/btnback"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Car Login"
+        android:layout_centerInParent="true"
+        android:textColor="#fff"
+        />
+    <Button
+        android:id="@+id/userlogin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnback"
+        android:textColor="#fff"
+        android:text="User Login"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/carlogin"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
