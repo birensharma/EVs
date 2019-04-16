@@ -1,7 +1,9 @@
 package com.example.evehicle;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -13,9 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -29,16 +34,19 @@ import java.util.Random;
 
 public class Payment extends AppCompatActivity implements PaytmPaymentTransactionCallback {
     private final String mid="dyIkKt14536106260780";
-    private final String orderId="Ord"+new Random().nextInt(100000000);
-    private final String custid="Cus"+new Random().nextInt(100000000);
+    private  String orderId;
+    private  String custid;
     private Button pay;
     private EditText amount;
     private String money="0";
+    private RatingBar rate;
+    private DatabaseReference db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
+        db= FirebaseDatabase.getInstance().getReference();
         pay=findViewById(R.id.paynow);
         amount=findViewById(R.id.money);
 
@@ -48,7 +56,7 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
                     new String[]{Manifest.permission.READ_SMS,
                     Manifest.permission.RECEIVE_SMS}, 101);
         }
-        Toast.makeText(this, "OrderId:"+orderId+"\nCId:"+custid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OrderId:"+orderId+"\nCId:"+custid, Toast.LENGTH_SHORT).show();
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +68,8 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
         });
     }
     private void startPayment(){
+        orderId="Ord"+new Random().nextInt(100000000);
+        custid="Cus"+new Random().nextInt(100000000);
         money=amount.getText().toString();
         sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
         dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -134,10 +144,34 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
     }
     @Override
     public void onTransactionResponse(Bundle bundle) {
-        Toast.makeText(this, "Transaction Success"+bundle.toString(), Toast.LENGTH_SHORT).show();
-        //txt.setText(bundle.toString());
-        //Log.i("checksum ", " response true " + bundle.toString());
-        //startActivity(new Intent(this,Feedback.class));
+        Toast.makeText(this, "Transaction Success", Toast.LENGTH_SHORT).show();
+        final View view=this.getLayoutInflater().inflate(R.layout.activity_feedback,null);
+        AlertDialog.Builder builder =new AlertDialog.Builder(this);
+        builder.setTitle("Please Rate us")
+                .setMessage("It helps us to improve our service")
+                .setView(view)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       rate= view.findViewById(R.id.rate);
+                       float n= rate.getRating();
+                        db.child("Feedback/"+FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("rating").setValue(n);
+                        db.child("Feedback/"+FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("email").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                        Toast.makeText(Payment.this, "Thank you for rating us",
+                                Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Payment.this, Dashboard.class));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Payment.this, Dashboard.class));
+                    }
+                });
+        builder.create().show();
+
     }
     @Override
     public void networkNotAvailable() {

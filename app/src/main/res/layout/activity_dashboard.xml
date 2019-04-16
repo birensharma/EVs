@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard"
+    tools:context=".Dashboard"
     android:padding="10dp">
     <TextView
         android:id="@+id/text"
@@ -66,8 +66,17 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/transbtn"
-            android:textColor="#000"
+            android:textColor="#2196f3"
             android:text="Location"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:id="@+id/ratings"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transbtn"
+            android:textColor="#2196f3"
+            android:text="View \nRatings"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp" />
     </LinearLayout>

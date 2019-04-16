@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class university extends AppCompatActivity{
+public class University extends AppCompatActivity{
 
     private Button send;
     private EditText input;
@@ -57,12 +55,12 @@ public class university extends AppCompatActivity{
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(university.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(University.this, "Notification Sent", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(university.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(University.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -79,7 +77,7 @@ public class university extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(input.getText().toString().equals(""))
-                    Toast.makeText(university.this, "Input is empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(University.this, "Input is empty", Toast.LENGTH_SHORT).show();
                 else
                     db.addValueEventListener(valueEventListener);
             }
@@ -99,7 +97,7 @@ public class university extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (!task.isSuccessful())
-                            Toast.makeText(university.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(University.this, "Unable to subscribe", Toast.LENGTH_SHORT).show();
                     }
                 });
 

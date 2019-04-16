@@ -20,8 +20,8 @@
         android:roundIcon="@drawable/electriccar"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Payment"></activity>
-        <activity android:name=".Feedback" />
+        <activity android:name=".ViewFeedback"></activity>
+        <activity android:name=".Payment" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,7 +49,7 @@
             android:name=".Custom"
             android:label="Appliances" />
         <activity
-            android:name=".choice"
+            android:name=".Choice"
             android:label="Choice" />
 
         <service android:name=".MyFirebaseMessaging">
@@ -59,16 +59,16 @@
         </service>
 
         <activity
-            android:name=".society"
+            android:name=".Society"
             android:label="Society" />
         <activity
-            android:name=".mall"
+            android:name=".Mall"
             android:label="Mall" />
         <activity
-            android:name=".university"
+            android:name=".University"
             android:label="University" />
         <activity
-            android:name=".dashboard"
+            android:name=".Dashboard"
             android:label="Dashboard" />
         <activity android:name=".Response" />
         <activity

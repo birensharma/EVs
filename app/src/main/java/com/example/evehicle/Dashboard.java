@@ -18,11 +18,11 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 123;
     private FirebaseAuth auth;
-    private Button logout,getLoc,university,locBtn;
+    private Button logout,getLoc,university,locBtn,rating;
     private TextView txt, loc;
     private double latitude = 0.0, longitude = 0.0;
 
@@ -34,14 +34,20 @@ public class dashboard extends AppCompatActivity {
         logout=findViewById(R.id.out);
         txt=findViewById(R.id.text);
         loc=findViewById(R.id.loc);
+        rating=findViewById(R.id.ratings);
         getLoc=findViewById(R.id.getloc);
         university=findViewById(R.id.uni);
         locBtn=findViewById(R.id.track);
-
+        rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this,ViewFeedback.class));
+            }
+        });
         university.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           startActivity(new Intent(dashboard.this,choice.class));
+           startActivity(new Intent(Dashboard.this, Choice.class));
             }
         });
         String locationDetail="Latitide:"+latitude+"\nLongitude:"+longitude;
@@ -49,7 +55,7 @@ public class dashboard extends AppCompatActivity {
         locBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(dashboard.this,LocationMap.class));
+                startActivity(new Intent(Dashboard.this,LocationMap.class));
             }
         });
         loc.setText(locationDetail);
@@ -61,7 +67,7 @@ public class dashboard extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(dashboard.this, "Logging out...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Logging out...", Toast.LENGTH_SHORT).show();
                 auth.signOut();
                 finish();
             }
@@ -88,24 +94,24 @@ public class dashboard extends AppCompatActivity {
                             longitude = location.getLongitude();
                             latitude = location.getLatitude();
                             String locationDetail="Latitide:"+latitude+"\nLongitude:"+longitude;
-                            Toast.makeText(dashboard.this, locationDetail, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Dashboard.this, locationDetail, Toast.LENGTH_SHORT).show();
                             loc.setText(locationDetail);                        }
 
                         @Override
                         public void onStatusChanged(String provider, int status, Bundle extras) {
-                            Toast.makeText(dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
 
                         }
 
                         @Override
                         public void onProviderEnabled(String provider) {
-                            Toast.makeText(dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
 
                         }
 
                         @Override
                         public void onProviderDisabled(String provider) {
-                            Toast.makeText(dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Dashboard.this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
 
                         }
                     });

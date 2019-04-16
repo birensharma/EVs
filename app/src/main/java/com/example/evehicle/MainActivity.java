@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void navigate(){
-        startActivity(new Intent(this,dashboard.class));
+        startActivity(new Intent(this, Dashboard.class));
     }
     private void init(){
 

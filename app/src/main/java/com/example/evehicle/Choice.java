@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class choice extends AppCompatActivity {
+public class Choice extends AppCompatActivity {
 
     private Button custom, standard;
 
@@ -22,13 +22,13 @@ public class choice extends AppCompatActivity {
         standard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(choice.this,university.class));
+                startActivity(new Intent(Choice.this, University.class));
             }
         });
         custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(choice.this,Custom.class));
+                startActivity(new Intent(Choice.this,Custom.class));
             }
         });
     }
