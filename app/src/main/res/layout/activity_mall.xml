@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Mall">
+    tools:context=".Mall"
+    android:background="@drawable/appbackground"
+    >
 
 </android.support.constraint.ConstraintLayout>

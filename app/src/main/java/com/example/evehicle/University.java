@@ -1,5 +1,6 @@
 package com.example.evehicle;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,8 @@ public class University extends AppCompatActivity{
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(University.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(University.this,LocationMap.class));
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                             @Override

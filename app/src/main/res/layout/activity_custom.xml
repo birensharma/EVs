@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Custom"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:background="@drawable/appbackground"
+    >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
