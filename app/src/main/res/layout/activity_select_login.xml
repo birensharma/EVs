@@ -38,5 +38,17 @@
         android:layout_below="@id/carlogin"
         android:layout_centerHorizontal="true"
         />
+    <Button
+        android:id="@+id/carride"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnback"
+        android:textColor="#fff"
+        android:text="Ride Sharing"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/userlogin"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

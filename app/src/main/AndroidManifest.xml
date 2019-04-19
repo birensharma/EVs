@@ -83,6 +83,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".com.cabs.frnds.cabme.MainActivityRide"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.mapactivity"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.customerloginactivity"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.CustomerMapActivity"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.driverloginactivity"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.DriverMapsActivity"
+            android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.DriverSettingsActivity"
+            android:label="V2G Service" />
+
     </application>
 
 </manifest>
