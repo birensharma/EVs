@@ -104,6 +104,9 @@
         <activity
             android:name=".com.cabs.frnds.cabme.DriverSettingsActivity"
             android:label="V2G Service" />
+        <activity
+            android:name=".com.cabs.frnds.cabme.CustomerSettingsAcivity"
+            android:label="V2G Service" />
 
     </application>
 

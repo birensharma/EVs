@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.cabs.frnds.cabme.DriverSettingsActivity"
     android:orientation="vertical"
-    android:padding="20sp">
+    android:padding="20sp"
+    android:background="@drawable/appbackground">
     <ImageView
         android:layout_width="100sp"
         android:layout_height="100sp"
         android:id="@+id/profileImage"
         android:src="@mipmap/ic_default"
-        android:layout_marginBottom="20sp"/>
+        android:layout_marginBottom="20sp"
+        android:layout_gravity="center"/>
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
@@ -40,7 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/radioGroup"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,15 +61,14 @@
             android:id="@+id/CabSUV"/>
     </RadioGroup>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
+        android:textColor="#fff"
         android:layout_height="wrap_content"
         android:id="@+id/confirm"
-        android:text="confirm"/>
+        android:layout_marginTop="20dp"
+        android:text="confirm"
+        android:background="@drawable/btnback"
+        android:layout_gravity="center"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/back"
-        android:text="back"/>
 
 </LinearLayout>

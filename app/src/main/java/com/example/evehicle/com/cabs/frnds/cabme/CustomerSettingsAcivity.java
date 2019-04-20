@@ -58,138 +58,121 @@ public class CustomerSettingsAcivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_settings_acivity);
 
-        mNameField = (EditText) findViewById(R.id.name);
-        mPhoneField = (EditText) findViewById(R.id.phone);
+        mNameField =  findViewById(R.id.name);
+        mPhoneField =  findViewById(R.id.phone);
 
-        mProfileImage = (ImageView) findViewById(R.id.profileImage);
+        mProfileImage =  findViewById(R.id.profileImage);
 
 
-        nBack = (Button) findViewById(R.id.back);
-        mConfirm = (Button) findViewById(R.id.confirm);
+//        nBack =  findViewById(R.id.back);
+        mConfirm = findViewById(R.id.confirm);
 
         mAuth = FirebaseAuth.getInstance();
-        userID = mAuth.getCurrentUser().getUid();
-        mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("customers").child(userID);
+        userID=mAuth.getCurrentUser().getEmail();
+        mNameField.setText(userID);
+//        getUserInfo();
 
-        getUserInfo();
 
-
-        mProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,1);
-            }
-        });
+//        mProfileImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType("image/*");
+//                startActivityForResult(intent,1);
+//            }
+//        });
 
 
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveUserInformation();
-            }
-        });
-
-        nBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//                saveUserInformation();
                 finish();
-                return;
             }
         });
+
+//        nBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//                return;
+//            }
+//        });
     }
 
 
 
-    private void getUserInfo(){
-        mCustomerDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
-                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                    if(map.get("name")!=null){
-                        mName = map.get("name").toString();
-                        mNameField.setText(mName);
-                    }
-                    if(map.get("phone")!=null){
-                        mPhone = map.get("phone").toString();
-                        mPhoneField.setText(mPhone);
-                    }
-                    if(map.get("profileImageUrl")!=null){
-                        mProfileImageUrl = map.get("profileImageUrl").toString();
-                        Glide.with(getApplication()).load(mProfileImageUrl).into(mProfileImage);
-                }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-    private void saveUserInformation() {
-        mName = mNameField.getText().toString();
-        mPhone = mPhoneField.getText().toString();
-
-
-        Map userInfo = new HashMap();
-        userInfo.put("name",mName);
-        userInfo.put("phone",mPhone);
-        mCustomerDatabase.updateChildren(userInfo);
-        if (resultUri != null){
-
-            StorageReference filepath = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID);
-            Bitmap bitmap = null;
-
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(),resultUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            ByteArrayOutputStream baos  =  new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-            byte[] data = baos.toByteArray();
-            UploadTask uploadTask = filepath.putBytes(data);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    finish();
-                    return;
-                }
-            });
-
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-
-                    Map newImage = new HashMap();
-                    newImage.put("profileImageUrl",downloadUrl.toString());
-                    mCustomerDatabase.updateChildren(newImage);
-
-                    finish();
-                    return;
-                }
-            });
-
-        } else {
-            finish();
-        }
-    }
+//    private void getUserInfo(){
+//        mCustomerDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//    }
+//    private void saveUserInformation() {
+//        mName = mNameField.getText().toString();
+//        mPhone = mPhoneField.getText().toString();
+//
+//
+//        Map userInfo = new HashMap();
+//        userInfo.put("name",mName);
+//        userInfo.put("phone",mPhone);
+//        mCustomerDatabase.updateChildren(userInfo);
+//        if (resultUri != null){
+//
+//            StorageReference filepath = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID);
+//            Bitmap bitmap = null;
+//
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(),resultUri);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            ByteArrayOutputStream baos  =  new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+//            byte[] data = baos.toByteArray();
+//            UploadTask uploadTask = filepath.putBytes(data);
+//            uploadTask.addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    finish();
+//                    return;
+//                }
+//            });
+//
+//            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+//
+//                    Map newImage = new HashMap();
+//                    newImage.put("profileImageUrl",downloadUrl.toString());
+//                    mCustomerDatabase.updateChildren(newImage);
+//
+//                    finish();
+//                    return;
+//                }
+//            });
+//
+//        } else {
+//            finish();
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
-            final Uri imageUri = data.getData();
-            resultUri = imageUri;
-            mProfileImage.setImageURI(resultUri);
+//        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+//            final Uri imageUri = data.getData();
+//            resultUri = imageUri;
+//            mProfileImage.setImageURI(resultUri);
 
 
         }
-    }
 }

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -58,7 +59,8 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     Location mLastLocation;
     LocationRequest mLocationRequest;
 
-    private Button mLogout, mRequest, mSettings;
+    private Button mLogout, mRequest;
+    private FloatingActionButton mSettings;
 
     private LatLng pickupLocation;
 
@@ -106,9 +108,9 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mRadioGroup.check(R.id.CabX);
-        mLogout = (Button) findViewById(R.id.logout);
-        mRequest = (Button) findViewById(R.id.request);
-        mSettings = (Button) findViewById(R.id.settings);
+        mLogout =  findViewById(R.id.logout);
+        mRequest =  findViewById(R.id.request);
+        mSettings = findViewById(R.id.settings);
 
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,7 +40,7 @@ public class DriverSettingsActivity extends AppCompatActivity {
 
     private EditText mNameField, mPhoneField,mCarField;
 
-    private Button nBack, mConfirm;
+    private Button  mConfirm;
     private ImageView mProfileImage;
 
     private FirebaseAuth mAuth;
@@ -64,48 +64,43 @@ public class DriverSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_settings);
 
-        mNameField = (EditText) findViewById(R.id.name);
-        mPhoneField = (EditText) findViewById(R.id.phone);
-        mCarField = (EditText) findViewById(R.id.car);
+        mNameField =  findViewById(R.id.name);
+        mPhoneField =  findViewById(R.id.phone);
+        mCarField =  findViewById(R.id.car);
 
-        mProfileImage = (ImageView) findViewById(R.id.profileImage);
+        mProfileImage =  findViewById(R.id.profileImage);
 
-        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        mRadioGroup =  findViewById(R.id.radioGroup);
 
-        nBack = (Button) findViewById(R.id.back);
-        mConfirm = (Button) findViewById(R.id.confirm);
+        mConfirm =  findViewById(R.id.confirm);
 
         mAuth = FirebaseAuth.getInstance();
-        userID = mAuth.getCurrentUser().getUid();
-        mDriverDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(userID);
+        userID = mAuth.getCurrentUser().getEmail();
+        mNameField.setText(mName);
 
-        getUserInfo();
+//        mDriverDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(userID);
+
+//        getUserInfo();
 
 
-        mProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,1);
-            }
-        });
+//        mProfileImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType("image/*");
+//                startActivityForResult(intent,1);
+//            }
+//        });
 
 
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveUserInformation();
+//                saveUserInformation();
+                finish();
             }
         });
 
-        nBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                return;
-            }
-        });
     }
 
 

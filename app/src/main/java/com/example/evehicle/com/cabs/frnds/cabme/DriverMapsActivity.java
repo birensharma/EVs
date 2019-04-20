@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -58,7 +59,8 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     Location mLastLocation;
     LocationRequest mLocationRequest;
 
-    private Button mLogout, mSettings, mRideStatus;
+    private Button mLogout, mRideStatus;
+    private FloatingActionButton mSettings;
 
     private int status = 0;
 
@@ -99,7 +101,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         mCustomerPhone = (TextView) findViewById(R.id.customerphone);
         mCustomerDestination = (TextView) findViewById(R.id.customerDestination);
 
-        mSettings = (Button) findViewById(R.id.settings);
+        mSettings =  findViewById(R.id.settings);
         mLogout = (Button) findViewById(R.id.logout);
         mRideStatus = (Button) findViewById(R.id.rideStatus);
         mRideStatus.setOnClickListener(new View.OnClickListener() {
